@@ -1,0 +1,12 @@
+<%= form.label :release_id, "Processing Release" %><br />
+<%= form.collection_select :release_id, Release.all, :id, :version, :include_blank => true %>
+<br />
+
+<%= form.label :platform_id, "Platform" %><br />
+<%= form.collection_select :platform_id, Platform.all, :id, :name_and_version, :include_blank => true %> <%= link_to "Add", new_platform_path %>
+<br />
+
+<%= form.label :browser_id, "Browser" %><br />
+<%= form.collection_select :browser_id, Browser.all, :id, :name, :include_blank => true %> <%= link_to "Add", new_browser_path %>
+<br />
+

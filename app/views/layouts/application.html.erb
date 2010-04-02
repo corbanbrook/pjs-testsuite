@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Processing-JS Test Suite</title>
+		<%= stylesheet_link_tag :all %>
+		<%= javascript_include_tag 'prototype', 'jsProgressBarHandler', 'application' %>
+		
+		<% if @configuration and params[:controller] == 'examples' %>
+		  <%= javascript_include_tag 'processing-' + @configuration.release.version %>
+		<% end %>
+		<script>
+		</script>
+	</head>
+	<body>
+	<div id="container">
+		<%= render :partial => 'navigation' %>
+		<div id="content">
+		  <% if current_user %><div id="logout"><%= link_to 'Logout', logout_path %></div><% end %>
+		  <h1>Processing-JS Test Suite</h1>
+			<% if flash[:notice] %>
+				<div id="notice"><%= flash[:notice] %></div>
+			<% end %>
+			<%= yield %>
+		</div>
+	</div>
+	<div style="clear:both;"></div>
+  <div id="footer">
+    <div id="leaderboard">
+      <h1>Leaderboard</h1>
+      <hr />
+      <table>
+        <% User.all.each do |user| %>
+          <tr><td><%= user.display_name %></td><td><%= user.tests.completed.count %></td></tr>
+        <% end %>
+      </table>
+    </div>
+    <div id="coverage">
+      <h1>Test Coverage (<%= (@configuration && params[:configuration_id]) ? "#{@configuration.release.version}" : "#{Release.first.version}" %>)</h1>
+      <hr />
+      <table id="test-coverage">
+        <tr><td></td>
+        <% Platform.all.each do |platform| %>
+          <th><%= platform.name_and_version %></th>
+        <% end %>
+        </tr>
+        <% Browser.all.each do |browser| %>
+          <tr><th><%= browser.name %></th>
+          <% Platform.all.each do |platform| %>
+            <td><span class="progressBarWhite" id="progressBar-<%= browser.id %><%= platform.id %>"><%= Configuration.percent_complete(platform, browser, (@configuration && params[:configuration_id]) ? @configuration.release : Release.first) %></span></td>
+          <% end %>
+          </tr>
+        <% end %>
+      </table>
+      
+    </div>
+  </div>
+  </body>
+</html>

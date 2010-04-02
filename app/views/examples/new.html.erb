@@ -1,0 +1,7 @@
+<h2>New Example</h2>
+
+<% form_for @example do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => "form", :object => f %>
+  <%= f.submit "Create" %>
+<% end %>

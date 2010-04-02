@@ -1,0 +1,7 @@
+<h2>New Configuration</h2>
+
+<% form_for @configuration do |f| %>
+  <%= f.error_messages %>
+  <%= render :partial => "form", :object => f %>
+  <%= f.submit "Create" %>
+<% end %>

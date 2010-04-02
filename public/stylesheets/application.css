@@ -1,0 +1,355 @@
+body {
+	font-family: arial, sans-serif;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+label {
+	font-weight: bold;
+  color: #222;
+}
+
+#section_content {
+  border: 4px solid #eee;
+  padding: 10px;
+}
+
+a img { 
+  border: 0;
+}
+
+img.gravatar {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #222;
+}
+
+h1 {
+ margin-top: 4px;
+ font-weight: normal;
+}
+
+h2 {
+ color: #222;
+ font-weight: normal;
+ margin-top: 6px;
+}
+
+h2 span.section {
+ color: #999;
+}
+
+#heading {
+	width: 1024px;
+}
+
+#footer {
+  border-top: 1px solid #666;
+  background-color: #111;
+  margin-top: 20px;
+  height: 400px;
+  color: #666;
+  padding: 20px;
+  /*padding-left: 230px;*/
+}
+
+/*#footer_container {
+  width: 760px;
+}*/
+
+#footer h1 {
+  font-size: 12px;
+  font-weight: bold;
+  color: #888;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+#footer hr {
+  height: 4px;
+  border: none;
+  background-color: #444;
+}
+
+#leaderboard {
+  float: left;
+  width: 190px;
+  padding-right: 20px;
+}
+
+#coverage {
+  width: 760px;
+  margin-left: 210px;
+}
+
+#coverage table {
+  width: 100%;
+}
+
+#coverage table th {
+  vertical-align: top;
+  text-align: left;
+}
+
+#container {
+	margin: 10px;
+	margin-top: 20px;
+	width: 980px;
+}
+
+#content {
+	width: 760px;
+	float: right;
+	margin-left: 20px;
+}
+
+#navigation {
+  width: 200px;
+  padding: 0;
+  margin: 0;
+  float: left;
+}
+
+#navigation ul {
+  margin: 0;
+  padding: 0;
+}
+
+#navigation li {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+table#account {
+
+}
+
+table#account td {
+  vertical-align: top;
+}
+
+table#configurations {
+  width: 100%; 
+}
+
+table#configurations th {
+  text-align: left;
+  vertical-align: top;
+}
+
+table#configurations td {
+}
+
+table#configurations tr.detected {
+}
+
+table#configurations .platform {
+  width: 100px;
+}
+
+table#configurations .browser {
+  width: 80px;
+}
+
+table#configurations .release {
+  width: 100px;
+}
+
+table#configurations .progress {
+  width: 150px;
+}
+
+table#configurations td.test {
+  width: 80px;
+}
+
+table#configurations td.summary{
+  width: 80px;
+}
+
+table#configurations td.pass {
+  width: 40px;
+}
+
+table#configurations td.fail {
+  width: 40px;
+}
+
+table#configurations .stats {
+  text-align: left;
+  width: 80px;
+}
+
+table#configurations td.release {
+}
+
+table#signup {
+  width: 100%;
+}
+
+table#signup td {
+  vertical-align: top;
+
+}
+
+div#example table {
+  width: 100%;
+  margin: 0;
+}
+
+div#example table td {
+  vertical-align: top;
+}
+
+div#example table #source {
+  overflow: auto;
+  width: 530px;
+  height: 180px;
+  margin-left: 10px;
+  background-color: #eee;
+  padding: 10px;
+}
+
+span.percentText {
+  padding-left: 4px;
+}
+
+div.buttons {
+
+}
+
+div.buttons input {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #222;
+  color: white;
+  height: 30px;
+  width: 74px;
+  padding: 2px;
+}
+
+div.buttons a {
+  display: block;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #222;
+  color: white;
+  height: 16px;
+  width: 80px;
+  padding: 3px;
+  padding-bottom: 2px;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: center;
+}
+
+div.buttons input.pass {
+  background-image: url(/images/greenbutton.png);
+}
+
+div.buttons input.pass:hover {
+  background-image: url(/images/greenbutton-hover.png);
+}
+
+div.buttons input.fail {
+  background-image: url(/images/redbutton.png);
+}
+
+div.buttons input.fail:hover {
+  background-image: url(/images/redbutton-hover.png);
+}
+
+div.buttons a.test-configuration {
+  background-image: url(/images/greenbutton.png);
+}
+
+div.buttons a.test-configuration:hover {
+  background-image: url(/images/greenbutton-hover.png);
+}
+
+div.buttons a.summary {
+  background-image: url(/images/greybutton.png);
+}
+
+div.buttons a.summary:hover {
+  background-image: url(/images/greybutton-hover.png);
+}
+
+div.buttons a.fail {
+  background-image: url(/images/redbutton.png);
+}
+
+div.buttons a.fail:hover {
+  background-image: url(/images/redbutton-hover.png);
+}
+
+div#detected-configuration {
+  background-color: #eee;
+  padding: 10px;
+}
+
+div#detected-configuration h1 {
+  font-size: 12px;
+  margin: 0px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #222;
+}
+
+hr {
+ background-color: #ccc;
+ height: 5px;
+ border: 1px inset white;
+}
+
+textarea.note {
+  height: 100px;
+  width: 100%;
+}
+
+#navigation li.selected {
+  background-color: #ffc;
+}
+
+#navigation a {
+    color: black;
+}
+
+#logout a {
+  color: black;
+}
+
+#notice {
+  padding: 10px;
+  background-color: #ffc;
+}
+
+#save {
+  margin-top: 10px;
+  text-align: right;
+}
+
+#logout {
+  float: right;
+}
+
+.errorExplanation {
+  background-color: #ffcccc;
+  color: #660000;
+  padding: 10px;
+  border: 1px solid #660000;
+  margin-right: 10px;
+}
+
+.errorExplanation p {
+  font-weight: bold;
+}

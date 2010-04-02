@@ -1,0 +1,29 @@
+<h2>Examples</h2>
+<table id="examples">
+<% if @configuration %>
+  <% @configuration.tests.completed.each do |test| %>
+    <tr>
+      <td>
+        <% if test.pass %>
+          <img src="/images/pass.png" align="absmiddle" style="margin-right: 4px;">
+        <% else %>
+          <img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;">
+        <% end %>
+      </td>
+      <td style="text-align: right;"><%= test.example.id %></td>
+      <td>
+        <%= link_to test.example.name, configuration_example_path(@configuration, test.example) %>
+      </td>
+    </tr>
+  <% end %>
+<% else %>
+  <% @examples.each do |example| %>
+    <tr>
+      <td style="text-align: right;"><%= example.id %></td>
+      <td>
+        <%= link_to example.name, example_path(example) %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
+</table>
