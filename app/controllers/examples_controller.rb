@@ -37,10 +37,10 @@ class ExamplesController < ApplicationController
         format.html
         format.pjs  { render :text => @example.source }
       end
-    elsif params[:id] and params[:configuration_id]
+    elsif params[:id] and params[:configuration_id] # couldnt find a test so we hit the last one, needs to be a better way of doing this.
       Configuration.find(params[:configuration_id]).update_attribute :is_complete, true
       flash[:notice] = "Test configuration complete!"
-      redirect_to account_url
+      redirect_to configuration_examples_url(params[:configuration_id])
     end
   end
 
