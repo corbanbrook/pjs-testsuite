@@ -1,29 +1,30 @@
 <% if @configuration %>
-<div id="navigation">
-  <% if @example %>
-    <h2>Test <%= @example.id %> of <%= Example.count %></h2>
-	<% else %>
-	  <h2></h2>
-	<% end %>
-	<div><span class="progressBar" id="progressBar-<%=@configuration.id %>"><%= @configuration.percent_complete%>%</span></div>
+  <div id="navigation">
+    <% if @example %>
+      <h2>Test <%= @example.id %> of <%= Example.count %></h2>
+  	<% else %>
+  	  <h2></h2>
+  	<% end %>
+  	<div><span class="progressBar" id="progressBar-<%=@configuration.id %>"><%= @configuration.percent_complete%>%</span></div>
   
-  <!-- Pass/Fail Stats -->
-  <p>
-    <img src="/images/pass.png" align="absmiddle" style="margin-right: 4px;"><%= @configuration.tests.passed.count %>
-    <img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;"><%= @configuration.tests.failed.count %>
-  </p>
+    <!-- Pass/Fail Stats -->
+    <p>
+      <img src="/images/pass.png" align="absmiddle" style="margin-right: 4px;"><%= @configuration.tests.passed.count %>
+      <img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;"><%= @configuration.tests.failed.count %>
+    </p>
   
-  <hr />
+    <hr />
 
-  <!-- Configuration -->
-  <p>
-    Processing-js v<%= @configuration.release.version %><br />
-    <%= @configuration.platform.name_and_version %><br />
-    <%= @configuration.browser.name %><br />
-  </p>
+    <!-- Configuration -->
+    <p>
+      Processing-js v<%= @configuration.release.version %><br />
+      <%= @configuration.platform.name_and_version %><br />
+      <%= @configuration.browser.name %><br />
+    </p>
   
-	<ul>
-	  <li <%= 'class="selected"' if nil %>><%= link_to "Back to Account", account_path %></li>
-	</ul>
-</div>
+  	<ul>
+  	  <li><%= link_to "Account", account_path %></li>
+  	  <li><%= link_to "Summary", configuration_examples_path(@configuration) %></li>
+  	</ul>
+  </div>
 <% end %>

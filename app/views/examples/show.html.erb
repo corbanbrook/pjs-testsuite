@@ -18,6 +18,12 @@
       <%= f.text_area :note, :class => "note" %>
       <br /><br />
       <div class="buttons">
+        <% if @test.pass == true %>
+          Marked <img src="/images/pass.png" align="absmiddle" style="margin-right: 4px;">
+        <% elsif @test.pass == false %>
+          Marked <img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;">
+        <% end %>
+        
         <%= f.submit "Skip", { :name => "skip", :class => "skip" } %>
         <%= f.submit "Fail", { :name => "fail", :class => "fail" } %>
         <%= f.submit "Pass", { :name => "pass", :class => "pass" } %>

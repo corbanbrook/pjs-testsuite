@@ -1,13 +1,15 @@
 <h2>Examples</h2>
 <table id="examples">
 <% if @configuration %>
-  <% @configuration.tests.completed.each do |test| %>
+  <% @configuration.tests.each do |test| %>
     <tr>
       <td>
-        <% if test.pass %>
+        <% if test.pass == true%>
           <img src="/images/pass.png" align="absmiddle" style="margin-right: 4px;">
-        <% else %>
+        <% elsif test.pass == false %>
           <img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;">
+        <% else %>
+        
         <% end %>
       </td>
       <td style="text-align: right;"><%= test.example.id %></td>
