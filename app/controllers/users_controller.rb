@@ -17,7 +17,12 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = @current_user
+    if params[:id]
+      @user = User.find(params[:id])
+    else
+      @user = @current_user
+    end
+    
     @example_count = Example.count;
     @detected_configuration = Configuration.new 
     

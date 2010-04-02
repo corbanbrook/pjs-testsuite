@@ -30,7 +30,16 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-
+  
+  def require_admin
+    unless current_user && current_user.is_admin?
+      store_location
+      flash[:notice] = "You do not have permission to access this page"
+      redirect_to account_url
+      return false
+    end
+  end
+  
   def require_no_user
     if current_user
       store_location

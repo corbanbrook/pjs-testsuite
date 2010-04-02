@@ -1,0 +1,50 @@
+<% if @found_new_configuration %>
+  <div id="detected-configuration">
+    <h1>New Configuration Detected</h1>
+    
+    <p>Your current platform/browser configuration has not been added to the test suite. Please specify the processing-js release version below and click <b>Add</b> to begin testing.</p>
+    
+    <h1>Current User Agent</h1>
+    <p><%= @user_agent %></p>
+    
+    <% form_for @detected_configuration do |f| -%>
+      <table width="100%">
+        <tr><td width="100"><b>Platform</b></td>
+          <td colspan="2">
+            <% if @detected_configuration.platform %>
+              <%= f.hidden_field :platform_id %>
+              <%= @detected_configuration.platform.name_and_version %>
+            <% else %>
+              <%= f.collection_select :platform_id, Platform.all.select {|p| @user_agent.match(p.name) }, :id, :name_and_version %>
+            <% end %>
+          </td>
+        </tr>
+        <tr><td><b>Browser</b></td>
+          <td colspan="2">
+            <% if @detected_configuration.browser %>
+              <%= f.hidden_field :browser_id  %>
+              <%= @detected_configuration.browser.name %>
+            <% else %>
+              <%= f.collection_select :browser_id, Browser.all, :id, :name %>
+            <% end%>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Processing-js Release</b></td>
+          <td><%= f.collection_select :release_id, Release.all, :id, :version %></td>
+          <td>
+            <div class="buttons" style="text-align: right;">
+              <%= f.submit "Add", :class => "pass" %>
+            </div>      
+          </td>
+        </tr>
+      </table>
+    <% end -%>
+  </div>
+  <hr />
+<% else %>
+  <div id="detected-configuration">
+    <h1>Current User Agent</h1>
+    <p><%= @user_agent %></p>
+  </div>
+<% end %>

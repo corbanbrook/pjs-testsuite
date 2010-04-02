@@ -29,8 +29,8 @@
       <h1>Leaderboard</h1>
       <hr />
       <table>
-        <% User.all.each do |user| %>
-          <tr><td><%= user.display_name %></td><td><%= user.tests.completed.count %></td></tr>
+        <% User.all.sort {|b,a| a.tests.completed.count <=> b.tests.completed.count }.each do |user| %>
+          <tr><td class="gravatar-sm"><%= gravatar_for user, :size => 16 %></td><td class="user"><%= link_to user.display_name, user_path(user) %></td><td class="score"><%= user.tests.completed.count %></td></tr>
         <% end %>
       </table>
     </div>

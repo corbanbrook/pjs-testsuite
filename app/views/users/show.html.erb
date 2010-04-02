@@ -4,7 +4,7 @@
     <tr>
       <td><%= gravatar_for @user %></td>
       <td>
-        <div><%= h @user.display_name %> <%= link_to 'Edit', edit_account_path %></div>
+        <div><%= link_to('Edit Account', edit_account_path) if @user == current_user %></div>
         <div><b><%= h @user.tests.completed.count %></b> completed tests</div>
       </td>
     </tr>
@@ -12,65 +12,20 @@
 </p>
 
 <h2>Configurations</h2>
-<p>
-  The processing-js test suite records data from many different platform/browser configurations.
-  The test suite will attempt to automatically detect your current configuration and prompt you to add it. If the test suite was unable to detect your current configuration you may
-  <%= link_to "add a configuration", new_configuration_path  %> manually.
-</p>
 
-<% if @found_new_configuration %>
-  <div id="detected-configuration">
-    <h1>New Configuration Detected</h1>
-    
-    <p>Your current platform/browser configuration has not been added to the test suite. Please specify the processing-js release version below and click <b>Add</b> to begin testing.</p>
-    
-    <h1>Current User Agent</h1>
-    <p><%= @user_agent %></p>
-    
-    <% form_for @detected_configuration do |f| -%>
-      <table width="100%">
-        <tr><td width="100"><b>Platform</b></td>
-          <td colspan="2">
-            <% if @detected_configuration.platform %>
-              <%= f.hidden_field :platform_id %>
-              <%= @detected_configuration.platform.name_and_version %>
-            <% else %>
-              <%= f.collection_select :platform_id, Platform.all.select {|p| @user_agent.match(p.name) }, :id, :name_and_version %>
-            <% end %>
-          </td>
-        </tr>
-        <tr><td><b>Browser</b></td>
-          <td colspan="2">
-            <% if @detected_configuration.browser %>
-              <%= f.hidden_field :browser_id  %>
-              <%= @detected_configuration.browser.name %>
-            <% else %>
-              <%= f.collection_select :browser_id, Browser.all, :id, :name %>
-            <% end%>
-          </td>
-        </tr>
-        <tr>
-          <td><b>Processing-js Release</b></td>
-          <td><%= f.collection_select :release_id, Release.all, :id, :version %></td>
-          <td>
-            <div class="buttons" style="text-align: right;">
-              <%= f.submit "Add", :class => "pass" %>
-            </div>      
-          </td>
-        </tr>
-      </table>
-    <% end -%>
-  </div>
-  <hr />
-<% else %>
-  <div id="detected-configuration">
-    <h1>Current User Agent</h1>
-    <p><%= @user_agent %></p>
-  </div>
+<% if @user == current_user %>
+  <p>
+    The processing-js test suite records data from many different platform/browser configurations.
+    The test suite will attempt to automatically detect your current configuration and prompt you to add it. If the test suite was unable to detect your current configuration you may
+    <%= link_to "add a configuration", new_configuration_path  %> manually.
+  </p>
+
+  <%= render :partial => 'detected_configuration' %>
+
+  <p><%= link_to "Create a new configuration", new_configuration_path  %></p>
 <% end %>
 
 <% unless @user.configurations.empty? %>
-  <p><%= link_to "Create a new configuration", new_configuration_path  %></p>
   
   <table id="configurations">
     <tr>
@@ -86,7 +41,7 @@
   <% @user.configurations.each do |configuration| %>
     <% configuration_enabled = @user_agent.match(configuration.platform.regexp) && @user_agent.match(configuration.browser.name) %>
     <tr class="<%= configuration_enabled ? "detected" : "" %>">
-      <td class="release"><%= configuration.release.version %> <%= link_to "Edit", edit_configuration_path(configuration) %></td>
+      <td class="release"><%= configuration.release.version %> <%= link_to("Edit", edit_configuration_path(configuration)) if @user == current_user %></td>
       <td class="platform"><%= configuration.platform.name_and_version %></td>
       <td class="browser"><%= configuration.browser.name %></td>
       <td class="progress"><span class="progressBar" id="progressBar-<%=configuration.id %>"><%= configuration.percent_complete %>%</span></td>
@@ -94,10 +49,12 @@
       <td class="fail"><img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;"><%= configuration.tests.failed.count %></td>
       <td class="test">
         <div class="buttons">
-          <% if configuration_enabled and @example_count > 0 %>
-            <%= link_to((configuration.tests.completed.count == 0) ? "Start" : "Continue", configuration_example_path(configuration, configuration.current_example_id || Example.first), :class => "test-configuration") %>
-          <% else %>
-            <%= link_to("Disabled", configuration_example_path(configuration, configuration.current_example_id || Example.first), :confirm => "This configuration does not match the detected user agent. Are you sure you want to continue?", :class => "fail") %>
+          <% if @user == current_user %>
+            <% if configuration_enabled and @example_count > 0 %>
+              <%= link_to((configuration.tests.completed.count == 0) ? "Start" : "Continue", configuration_example_path(configuration, configuration.current_example_id || Example.first), :class => "test-configuration") %>
+            <% else %>
+              <%= link_to("Disabled", configuration_example_path(configuration, configuration.current_example_id || Example.first), :confirm => "This configuration does not match the detected user agent. Are you sure you want to continue?", :class => "fail") %>
+            <% end %>
           <% end %>
         </div></td>
       <td class="summary"><div class="buttons"><%= link_to("Summary", configuration_examples_path(configuration), :class => "summary") %></div></td>

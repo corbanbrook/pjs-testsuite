@@ -30,7 +30,7 @@ class ExamplesController < ApplicationController
       if params[:configuration_id]
         @configuration = Configuration.find(params[:configuration_id])
         @configuration.update_attribute :current_example_id, @example.id
-        @test = Test.find_or_create_by_configuration_id_and_example_id_and_user_id(:configuration_id => @configuration.id, :example_id => @example.id, :user_id => current_user.id)
+        @test = Test.find_or_create_by_configuration_id_and_example_id_and_user_id(:configuration_id => @configuration.id, :example_id => @example.id, :user_id => @configuration.user.id)
       end
       
       respond_to do |format|

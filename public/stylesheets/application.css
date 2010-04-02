@@ -79,6 +79,22 @@ h2 span.section {
   padding-right: 20px;
 }
 
+#leaderboard table {
+  width: 100%;
+}
+
+#leaderboard table td.score {
+  text-align: right;
+}
+
+#leaderboard table td.user a {
+  color: #ccc;
+}
+
+#leaderboard table td.gravatar-sm {
+  width: 16px;
+}
+
 #coverage {
   width: 760px;
   margin-left: 210px;
@@ -217,12 +233,14 @@ div#example table #source {
   padding: 10px;
 }
 
+
+
 span.percentText {
   padding-left: 4px;
 }
 
 div.buttons {
-
+  text-align: right;
 }
 
 div.buttons input {
@@ -266,6 +284,14 @@ div.buttons input.fail {
 
 div.buttons input.fail:hover {
   background-image: url(/images/redbutton-hover.png);
+}
+
+div.buttons input.skip {
+  background-image: url(/images/greybutton.png);
+}
+
+div.buttons input.skip:hover {
+  background-image: url(/images/greybutton-hover.png);
 }
 
 div.buttons a.test-configuration {
