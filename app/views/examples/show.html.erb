@@ -29,5 +29,13 @@
         <%= f.submit "Pass", { :name => "pass", :class => "pass" } %>
       </div>
     <% end %>
+  <% else %>
+    <div class="buttons">
+      <% if @test.pass == true %>
+        Marked <img src="/images/pass.png" align="absmiddle" style="margin-right: 4px;">
+      <% elsif @test.pass == false %>
+        Marked <img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;">
+      <% end %>
+    </div>
   <% end %>
 </div>
