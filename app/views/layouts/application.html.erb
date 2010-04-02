@@ -46,7 +46,7 @@
         <% Browser.all.each do |browser| %>
           <tr><th><%= browser.name %></th>
           <% Platform.all.each do |platform| %>
-            <td><span class="progressBarWhite" id="progressBar-<%= browser.id %><%= platform.id %>"><%= Configuration.percent_complete(platform, browser, (@configuration && params[:configuration_id]) ? @configuration.release : Release.first) %></span></td>
+            <td><span class="progressBarWhite" id="progressBarWhite_<%= browser.id %>_<%= platform.id %>"><%= Configuration.percent_complete(platform, browser, (@configuration && params[:configuration_id]) ? @configuration.release : Release.first) %></span></td>
           <% end %>
           </tr>
         <% end %>

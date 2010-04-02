@@ -44,7 +44,7 @@
       <td class="release"><%= configuration.release.version %> <%= link_to("Edit", edit_configuration_path(configuration)) if @user == current_user %></td>
       <td class="platform"><%= configuration.platform.name_and_version %></td>
       <td class="browser"><%= configuration.browser.name %></td>
-      <td class="progress"><span class="progressBar" id="progressBar-<%=configuration.id %>"><%= configuration.percent_complete %>%</span></td>
+      <td class="progress"><span class="progressBar" id="progressBar_<%=configuration.id %>"><%= configuration.percent_complete %></span></td>
       <td class="pass"><img src="/images/pass.png" align="absmiddle" style="margin-right: 4px;"><%= configuration.tests.passed.count %></td>
       <td class="fail"><img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;"><%= configuration.tests.failed.count %></td>
       <td class="test">
