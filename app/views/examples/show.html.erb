@@ -1,3 +1,6 @@
+<%# error_messages_for(:test, :header_message => "Notice", :message => "") if @test %>
+<%= error_message_on(:test, :note) %>
+
 <div id="example">
   <h2><%= @example.name %></h2>
 
@@ -11,31 +14,50 @@
       <td><div id="source"><pre><code><%= h @example.source %></code></pre></div></td>
     </tr>
   </table>
-  <% if @test and @test.user == current_user %>
-    <% form_for @test do |f| %>
-      <br /><br />
-      <%= f.label :notes %><br />
-      <%= f.text_area :note, :class => "note" %>
-      <br /><br />
+  <% if @test %>
+    <% if @test.user == current_user %>
+      <% form_for @test do |f| %>
+        <br /><br />
+        <%= f.label :notes %><br />
+        <%= f.text_area :note, :class => "note" %>
+        <br /><br />
+        <div class="buttons">
+          <% if @test.pass == true %>
+            Marked <img src="/images/pass.png" align="absmiddle" style="margin-right: 4px;">
+          <% elsif @test.pass == false %>
+            Marked <img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;">
+          <% end %>
+        
+          <%= f.submit "Skip", { :name => "skip", :class => "skip" } %>
+          <%= f.submit "Fail", { :name => "fail", :class => "fail" } %>
+          <%= f.submit "Pass", { :name => "pass", :class => "pass" } %>
+        </div>
+      <% end %>
+    <% else %>
+      <table id="fails">
+        <tr>
+          <td class="gravatar"><%= gravatar_for @test.user, :size => 32 %></td>
+          <td class="title">
+            <%= link_to @test.user.display_name, user_path(@test.user) %>
+            <div style="padding-top: 4px;">Failed on <b>v<%= @test.configuration.release.version %></b> <%= @test.configuration.platform.name_and_version %> / <%= @test.configuration.browser.name %></div>
+          </td>
+          <td class="date"><div><b>Reported</b> <%= time_ago_in_words(@test.updated_at) %> ago</div></td>
+        </tr>
+        <tr><td></td>
+          <td colspan="2">
+            <div class="note">
+              <%= @test.note %>
+            </div>
+          </td>
+        </tr>
+      </table>
       <div class="buttons">
         <% if @test.pass == true %>
           Marked <img src="/images/pass.png" align="absmiddle" style="margin-right: 4px;">
         <% elsif @test.pass == false %>
           Marked <img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;">
         <% end %>
-        
-        <%= f.submit "Skip", { :name => "skip", :class => "skip" } %>
-        <%= f.submit "Fail", { :name => "fail", :class => "fail" } %>
-        <%= f.submit "Pass", { :name => "pass", :class => "pass" } %>
       </div>
     <% end %>
-  <% else %>
-    <div class="buttons">
-      <% if @test.pass == true %>
-        Marked <img src="/images/pass.png" align="absmiddle" style="margin-right: 4px;">
-      <% elsif @test.pass == false %>
-        Marked <img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;">
-      <% end %>
-    </div>
   <% end %>
 </div>

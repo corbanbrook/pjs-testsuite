@@ -30,12 +30,13 @@ class ExamplesController < ApplicationController
       if params[:configuration_id]
         @configuration = Configuration.find(params[:configuration_id])
         @configuration.update_attribute :current_example_id, @example.id
-        @test = Test.find_or_create_by_configuration_id_and_example_id_and_user_id(:configuration_id => @configuration.id, :example_id => @example.id, :user_id => @configuration.user.id)
+        
+        @test = flash[:test] || Test.find_or_create_by_configuration_id_and_example_id_and_user_id(:configuration_id => @configuration.id, :example_id => @example.id, :user_id => @configuration.user.id)
       end
       
       respond_to do |format|
         format.html
-        format.pjs  { render :text => @example.source }
+        format.pjs  { render :text => @example.source.gsub(/\r\n?/, "\n") }
       end
     elsif params[:id] and params[:configuration_id] # couldnt find a test so we hit the last one, needs to be a better way of doing this.
       Configuration.find(params[:configuration_id]).update_attribute :is_complete, true

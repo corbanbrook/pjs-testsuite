@@ -3,7 +3,8 @@
 	<head>
 		<title>Processing-JS Test Suite</title>
 		<%= stylesheet_link_tag :all %>
-		<%= javascript_include_tag 'prototype', 'jsProgressBarHandler', 'application' %>
+		<%= javascript_include_tag :defaults %>
+		<%= javascript_include_tag 'jsProgressBarHandler' %>
 		
 		<% if @configuration and params[:controller] == 'examples' %>
 		  <%= javascript_include_tag 'processing-' + @configuration.release.version %>
@@ -44,9 +45,16 @@
         <% end %>
         </tr>
         <% Browser.all.each do |browser| %>
-          <tr><th><%= browser.name %></th>
+          <tr><th style="vertical-align: top;"><%= browser.name %></th>
           <% Platform.all.each do |platform| %>
-            <td><span class="progressBarWhite" id="progressBarWhite_<%= browser.id %>_<%= platform.id %>"><%= Configuration.percent_complete(platform, browser, (@configuration && params[:configuration_id]) ? @configuration.release : Release.first) %></span></td>
+            <td>
+              <span class="progressBarWhite" id="progressBarWhite_<%= browser.id %>_<%= platform.id %>"><%= Configuration.percent_complete(platform, browser, (@configuration && params[:configuration_id]) ? @configuration.release : Release.first) %></span>
+              <div class="fail-count">
+                <% fail_count = Configuration.fails(platform, browser, (@configuration && params[:configuration_id]) ? @configuration.release : Release.first).length %>
+                
+                <img src="/images/fail_black.png" align="absmiddle" style="margin-right: 4px;"><%= (fail_count > 0) ? link_to(fail_count, fail_log_by_configuration_path(platform.id, browser.id, ((@configuration && params[:configuration_id]) ? @configuration.release : Release.first).version)) : "0" %>
+              </div>
+            </td>
           <% end %>
           </tr>
         <% end %>

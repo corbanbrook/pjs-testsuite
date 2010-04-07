@@ -19,4 +19,15 @@ class Configuration < ActiveRecord::Base
       configurations.max {|a,b| a.percent_complete <=> b.percent_complete}.percent_complete
     end
   end
+  
+  def self.fails(platform, browser, release)
+    fail_ids = []
+
+    configurations = Configuration.find_all_by_platform_id_and_browser_id_and_release_id(platform.id, browser.id, release.id)
+    configurations.each do |c|
+      fail_ids.concat(c.tests.failed.collect { |t| t.example.id }) if c.tests
+    end
+    
+    return fail_ids.uniq
+  end
 end

@@ -151,6 +151,37 @@ table#account td {
   vertical-align: top;
 }
 
+table#fails {
+  width: 100%; 
+}
+
+table#fails td.gravatar {
+  width: 32px;
+}
+
+table#fails td.title {
+  width: 500px;
+}
+
+table#fails td.title a {
+  font-size: 14px;
+}
+
+table#fails td {
+  vertical-align: top;
+}
+
+table#fails td.date {
+  text-align: right;
+  width: 200px;
+}
+
+div.note {
+  margin-bottom: 20px;
+  background-color: #eee;
+  padding: 10px;
+}
+
 table#configurations {
   width: 100%; 
 }
@@ -233,6 +264,9 @@ div#example table #source {
   padding: 10px;
 }
 
+div.fail-count a {
+  color: #eee;
+}
 
 
 span.percentText {
@@ -378,4 +412,10 @@ textarea.note {
 
 .errorExplanation p {
   font-weight: bold;
+}
+
+.formError {
+  background-image: url(/images/stripedbg.png);
+  font-weight: bold;
+  padding: 10px;
 }

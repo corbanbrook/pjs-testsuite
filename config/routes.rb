@@ -19,7 +19,11 @@ ActionController::Routing::Routes.draw do |map|
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
   
   map.fail_log 'fails', :controller => 'tests', :action => 'fails'
-
+  map.fail_log_by_platform 'fails/platform/:platform_id', :controller => 'tests', :action => 'fails'
+  map.fail_log_by_platform 'fails/browser/:browser_id', :controller => 'tests', :action => 'fails'
+  map.fail_log_by_release 'fails/release/:version', :controller => 'tests', :action => 'fails', :requirements => { :version => /.*/ }
+  map.fail_log_by_configuration 'fails/platform/:platform_id/browser/:browser_id/release/:version', :controller => 'tests', :action => 'fails', :requirements => { :version => /.*/ }
+  
   map.root :controller => "user_sessions", :action => "new"
 
 
