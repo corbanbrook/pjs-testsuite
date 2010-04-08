@@ -49,15 +49,9 @@ h2 span.section {
   border-top: 1px solid #666;
   background-color: #111;
   margin-top: 20px;
-  height: 400px;
   color: #666;
   padding: 20px;
-  /*padding-left: 230px;*/
 }
-
-/*#footer_container {
-  width: 760px;
-}*/
 
 #footer h1 {
   font-size: 12px;
