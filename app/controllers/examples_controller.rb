@@ -53,7 +53,7 @@ class ExamplesController < ApplicationController
     @example = Example.find(params[:id])
     if @example.update_attributes(params[:example])
       flash[:notice] = "Example updated!"
-      redirect_to account_url
+      redirect_to examples_url
     else
       render :action => :edit
     end
