@@ -17,7 +17,7 @@ class ExamplesController < ApplicationController
 
     if @example.save
       flash[:notice] = "New Example created!"
-      redirect_back_or_default examples_url
+      redirect_to new_example_url
     else
       render :action => :new
     end
