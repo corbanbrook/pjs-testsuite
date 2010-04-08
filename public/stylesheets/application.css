@@ -45,7 +45,7 @@ h2 span.section {
 	width: 1024px;
 }
 
-#footer {
+div#footer {
   border-top: 1px solid #666;
   background-color: #111;
   margin-top: 20px;
