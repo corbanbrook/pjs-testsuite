@@ -37,7 +37,7 @@
       </table>
     </div>
     <div id="coverage">
-      <h1>Test Coverage (<%= (@configuration && params[:configuration_id]) ? "#{@configuration.release.version}" : "#{Release.first.version}" %>)</h1>
+      <h1><span style="color: #eee;"><%= (@configuration && params[:configuration_id]) ? "#{@configuration.release.version}" : "#{Release.first.version}" %></span> Test Coverage / <%= Release.test_count((@configuration && params[:configuration_id]) ? @configuration.release : Release.first) %> tests</h1>
       <hr />
       <table id="test-coverage">
         <tr><td></td>
