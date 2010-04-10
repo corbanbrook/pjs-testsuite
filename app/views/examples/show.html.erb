@@ -56,7 +56,8 @@
           <td class="gravatar"><%= gravatar_for @test.user, :size => 32 %></td>
           <td class="title">
             <%= link_to @test.user.display_name, user_path(@test.user) %>
-            <div style="padding-top: 4px;">Failed on <b>v<%= @test.configuration.release.version %></b> <%= @test.configuration.platform.name_and_version %> / <%= @test.configuration.browser.name %></div>
+            <div style="padding-top: 4px;"><b>v<%= @test.configuration.release.version %></b> <%= @test.configuration.platform.name_and_version %> / <%= @test.configuration.browser.name %></div>
+            <div style="font-size: 10px;"><%= @test.user_agent %></div>
           </td>
           <td class="date"><div><b>Reported</b> <%= time_ago_in_words(@test.updated_at) %> ago</div></td>
         </tr>
