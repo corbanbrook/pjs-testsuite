@@ -41,13 +41,13 @@
       <hr />
       <table id="test-coverage">
         <tr><td></td>
-        <% Platform.all.each do |platform| %>
-          <th><%= platform.name_and_version %></th>
+        <% Browser.all.each do |browser| %>
+          <th><%= browser.name %></th>
         <% end %>
         </tr>
-        <% Browser.all.each do |browser| %>
-          <tr><th style="vertical-align: top;"><%= browser.name %></th>
-          <% Platform.all.each do |platform| %>
+        <% Platform.all.each do |platform| %>
+          <tr><th style="vertical-align: top;"><%= platform.name_and_version %></th>
+          <% Browser.all.each do |browser| %>
             <td>
               <span class="progressBarWhite" id="progressBarWhite_<%= browser.id %>_<%= platform.id %>"><%= Configuration.percent_complete(platform, browser, (@configuration && params[:configuration_id]) ? @configuration.release : Release.first) %></span>
               <div class="fail-count">
