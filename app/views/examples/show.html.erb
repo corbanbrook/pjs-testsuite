@@ -10,28 +10,45 @@
   
   <table>
     <tr>
+      <td>
+        Processing.js v
+        <% if params[:version] %>
+          <%= params[:version] %>
+        <% elsif @configuration %>
+          <%= @configuration.release.version %>
+        <% end %>
+      </td>
+      <td align="right">
+        <b>View test in:</b>
+        <%= select_tag( "action", options_for_select(Release.all.collect { |r| [r.version] }, :selected => params[:version]),
+            :onchange => "window.location.href='/configurations/#{@configuration.id}/examples/#{@example.id}/release/'+this.options[this.selectedIndex].value") %>
+      </td>
+    </tr>
+    <tr>
       <td width="200"><canvas datasrc="<%= example_path(@example, :format => :pjs) %>" width="200" height="200"></canvas></td>
       <td><div id="source"><pre><code><%= h @example.source %></code></pre></div></td>
     </tr>
   </table>
   <% if @test %>
     <% if @test.user == current_user %>
-      <% form_for @test do |f| %>
-        <br /><br />
-        <%= f.label :notes %><br />
-        <%= f.text_area :note, :class => "note" %>
-        <br /><br />
-        <div class="buttons">
-          <% if @test.pass == true %>
-            Marked <img src="/images/pass.png" align="absmiddle" style="margin-right: 4px;">
-          <% elsif @test.pass == false %>
-            Marked <img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;">
-          <% end %>
+      <% if !params[:version] || params[:version] ==  @configuration.release.version %>
+        <% form_for @test do |f| %>
+          <br /><br />
+          <%= f.label :notes %><br />
+          <%= f.text_area :note, :class => "note" %>
+          <br /><br />
+          <div class="buttons">
+            <% if @test.pass == true %>
+              Marked <img src="/images/pass.png" align="absmiddle" style="margin-right: 4px;">
+            <% elsif @test.pass == false %>
+              Marked <img src="/images/fail.png" align="absmiddle" style="margin-right: 4px;">
+            <% end %>
         
-          <%= f.submit "Skip", { :name => "skip", :class => "skip" } %>
-          <%= f.submit "Fail", { :name => "fail", :class => "fail" } %>
-          <%= f.submit "Pass", { :name => "pass", :class => "pass" } %>
-        </div>
+            <%= f.submit "Skip", { :name => "skip", :class => "skip" } %>
+            <%= f.submit "Fail", { :name => "fail", :class => "fail" } %>
+            <%= f.submit "Pass", { :name => "pass", :class => "pass" } %> 
+          </div>
+        <% end %>
       <% end %>
     <% else %>
       <table id="fails">

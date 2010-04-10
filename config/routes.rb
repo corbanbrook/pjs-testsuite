@@ -4,6 +4,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :configurations do |c|
     c.resources :examples
   end
+  map.configuration_example_release 'configurations/:configuration_id/examples/:id/release/:version', :controller => 'examples', :action => 'show', :requirements => { :version => /.*/ }
+  
   map.resources :examples
   map.resources :platforms
   map.resources :browsers
@@ -23,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
   map.fail_log_by_platform 'fails/browser/:browser_id', :controller => 'tests', :action => 'fails'
   map.fail_log_by_release 'fails/release/:version', :controller => 'tests', :action => 'fails', :requirements => { :version => /.*/ }
   map.fail_log_by_configuration 'fails/platform/:platform_id/browser/:browser_id/release/:version', :controller => 'tests', :action => 'fails', :requirements => { :version => /.*/ }
-  
+    
   map.root :controller => "user_sessions", :action => "new"
 
 
