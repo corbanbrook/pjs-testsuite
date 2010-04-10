@@ -7,7 +7,7 @@
     <td class="title">
       <%= link_to "Test #{fail.example.id}: #{fail.example.name}", configuration_example_path(fail.configuration, fail.example) %><br>
       <div style="padding-top: 4px;">Failed on <b>v<%= fail.configuration.release.version %></b> <%= fail.configuration.platform.name_and_version %> / <%= fail.configuration.browser.name %></div>
-
+      <div style="font-size: 10px;"><%= fail.user_agent %></div>
     </td>
     <td class="date"><div><b>Reported by</b> <%= link_to fail.user.display_name, user_path(fail.user) %></div><div><%= time_ago_in_words(fail.updated_at) %> ago</div></td>
   </tr>

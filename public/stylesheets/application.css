@@ -154,7 +154,7 @@ table#fails td.gravatar {
 }
 
 table#fails td.title {
-  width: 500px;
+  width: 540px;
 }
 
 table#fails td.title a {
@@ -167,7 +167,7 @@ table#fails td {
 
 table#fails td.date {
   text-align: right;
-  width: 200px;
+  width: 120px;
 }
 
 div.note {
